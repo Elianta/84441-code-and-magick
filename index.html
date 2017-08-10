@@ -51,11 +51,11 @@
   <div class="header-tree"></div>
 
   <h1 class="header-title section-title">
-    Code&thinsp;and&thinsp;Magick
+    Code&thinsp;and&thinsp;Magic
     <img src="img/title-site.png" alt="Code and magick">
   </h1>
   <p class="header-description">
-    Это игра, где главного героя, которым вам предстоит управлять и изменять заклинаниями окружающий мир зовут
+    Это игра, где главного героя, которым вам предстоит управлять и изменять заклинаниями окружающий мир, зовут
     Пендальф Синий.
     Вместе с ним вас ждет увлекательное приключение&hellip;
   </p>
@@ -174,7 +174,25 @@
 </template>
 
 <script>
-  var fireballSize = 100;
+  var fireballSize = 22;
+  var wizardSpeed = 3;
+  var wizardWidth = 70;
+  var getFireballSpeed = function (left) {
+    var speedDownwind = 5;
+    var speedUpwind = 2;
+    return left ? speedDownwind : speedUpwind;
+  };
+  var getWizardHeight = function (wizardWidth) {
+    var widthToHeightProportion = 1.337;
+    return widthToHeightProportion * wizardWidth;
+  };
+  var getWizardX = function (width) {
+    return width / 2 - wizardWidth / 2;
+  };
+  var getWizardY = function (height) {
+    var wizardHeight = getWizardHeight(wizardWidth);
+    return height / 3 - wizardHeight;
+  }
 </script>
 <script src="./js/game.js"></script>
 
