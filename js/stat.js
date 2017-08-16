@@ -1,4 +1,7 @@
 'use strict';
+var getRandom = function (min, max, digits) {
+  return (Math.random() * (max - min) + min).toFixed(digits);
+};
 window.renderStatistics = function (ctx, names, times) {
   // Тень облака
   ctx.beginPath();
@@ -48,9 +51,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[j] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // красный
     } else {
-      var minOpacity = 0.1;
-      var maxOpacity = 1;
-      var opacity = (Math.random() * (maxOpacity - minOpacity) + minOpacity).toFixed(1);
+      var opacity = getRandom(0.1, 1, 1);
       ctx.fillStyle = 'rgba(18, 61, 210, ' + opacity + ')'; // синий
     }
     ctx.fillRect(initialX + barHorizontalIndent * j, initialY, barWidth, -times[j] * histogramHeightProportion);
