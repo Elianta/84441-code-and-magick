@@ -3,9 +3,13 @@ var getRandom = function (min, max, digits) {
   return (Math.random() * (max - min) + min).toFixed(digits);
 };
 window.renderStatistics = function (ctx, names, times) {
+  var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
+  var COLOR_BLACK = 'rgba(0, 0, 0, 1.0)';
+  var COLOR_WHITE = 'rgba(255, 255, 255, 1.0)';
+  var COLOR_RED = 'rgba(255, 0, 0, 1)';
   // Тень облака
   ctx.beginPath();
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'; // черный
+  ctx.fillStyle = SHADOW_COLOR;
   ctx.arc(231, 190, 120, Math.PI / 180 * 125, Math.PI / 180 * 213, false);
   ctx.arc(171, 81, 60, Math.PI / 180 * 133, Math.PI / 180 * 323, false);
   ctx.arc(280, 160, 130, Math.PI / 180 * 240, Math.PI / 180 * 314, false);
@@ -15,8 +19,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fill();
   // Облако
   ctx.beginPath();
-  ctx.strokeStyle = 'rgba(0, 0, 0, 1.0)'; // черный
-  ctx.fillStyle = 'rgba(255, 255, 255, 1.0)'; // белый
+  ctx.strokeStyle = COLOR_BLACK;
+  ctx.fillStyle = COLOR_WHITE;
   ctx.arc(221, 180, 120, Math.PI / 180 * 125, Math.PI / 180 * 213, false);
   ctx.arc(161, 71, 60, Math.PI / 180 * 133, Math.PI / 180 * 323, false);
   ctx.arc(270, 150, 130, Math.PI / 180 * 240, Math.PI / 180 * 314, false);
@@ -26,7 +30,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.stroke();
   ctx.fill();
   // Надписи в конце игры
-  ctx.fillStyle = 'rgba(0, 0, 0, 1.0)'; // черный
+  ctx.fillStyle = COLOR_BLACK;
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура, вы победили!', 150, 50);
   ctx.fillText('Список результатов:', 150, 70);
@@ -49,13 +53,13 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'top';
   for (var j = 0; j < times.length; j++) {
     if (names[j] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // красный
+      ctx.fillStyle = COLOR_RED;
     } else {
       var opacity = getRandom(0.1, 1, 1);
       ctx.fillStyle = 'rgba(18, 61, 210, ' + opacity + ')'; // синий
     }
     ctx.fillRect(initialX + barHorizontalIndent * j, initialY, barWidth, -times[j] * histogramHeightProportion);
-    ctx.fillStyle = 'rgba(0, 0, 0, 1.0)'; // черный
+    ctx.fillStyle = COLOR_BLACK;
     ctx.fillText(names[j], initialX + barHorizontalIndent * j, initialY + nameTextTopIndent);
     ctx.fillText(times[j].toFixed(), initialX + barHorizontalIndent * j, initialY - times[j] * histogramHeightProportion - timeTextBottomIndent);
   }
