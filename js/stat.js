@@ -1,5 +1,5 @@
 'use strict';
-var getRandom = function (min, max, digits) {
+var getRandomFromRange = function (min, max, digits) {
   return (Math.random() * (max - min) + min).toFixed(digits);
 };
 window.renderStatistics = function (ctx, names, times) {
@@ -55,7 +55,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[j] === 'Вы') {
       ctx.fillStyle = COLOR_RED;
     } else {
-      var opacity = getRandom(0.1, 1, 1);
+      var opacity = getRandomFromRange(0.1, 1, 1);
       ctx.fillStyle = 'rgba(18, 61, 210, ' + opacity + ')'; // синий
     }
     ctx.fillRect(initialX + barHorizontalIndent * j, initialY, barWidth, -times[j] * histogramHeightProportion);
