@@ -6,7 +6,7 @@ var similarWizardList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
 var getRandomFromArray = function (array) {
-  return array[Math.floor(Math.random() * array.length)];
+  return array[Math.floor(window.getRandomFromRange(0, array.length))];
 };
 
 var WIZARD_FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия',
