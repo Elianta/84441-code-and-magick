@@ -1,6 +1,6 @@
 'use strict';
-var getRandomFromRange = function (min, max, digits) {
-  return (Math.random() * (max - min) + min).toFixed(digits);
+var getRandomFromRange = function (min, max) {
+  return (Math.random() * (max - min) + min);
 };
 window.renderStatistics = function (ctx, names, times) {
   var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
@@ -55,7 +55,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[j] === 'Вы') {
       ctx.fillStyle = COLOR_RED;
     } else {
-      var opacity = getRandomFromRange(0.1, 1, 1);
+      var opacity = getRandomFromRange(0.1, 1).toFixed(1);
       ctx.fillStyle = 'rgba(18, 61, 210, ' + opacity + ')'; // синий
     }
     ctx.fillRect(initialX + barHorizontalIndent * j, initialY, barWidth, -times[j] * histogramHeightProportion);
