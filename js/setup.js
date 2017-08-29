@@ -75,27 +75,21 @@ for (var i = 0; i < 4; i++) {
   });
 }
 
-userDialogOpen.addEventListener('click', function () {
-  openPopupUserDialog();
-});
+userDialogOpen.addEventListener('click', openPopupUserDialog);
 userDialogOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopupUserDialog();
   }
 });
 
-userDialogClose.addEventListener('click', function () {
-  closePopupUserDialog();
-});
+userDialogClose.addEventListener('click', closePopupUserDialog);
 userDialogClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopupUserDialog();
   }
 });
 
-userDialogSave.addEventListener('click', function () {
-  closePopupUserDialog();
-});
+userDialogSave.addEventListener('click', closePopupUserDialog);
 userDialogSave.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopupUserDialog();
