@@ -22,6 +22,9 @@
   var fireballColorSetup = userDialog.querySelector('.setup-fireball-wrap');
   var similarWizardList = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+  var shopElement = document.querySelector('.setup-artifacts-shop');
+  var artifactsElement = document.querySelector('.setup-artifacts');
+  var draggedItem = null;
 
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -50,22 +53,48 @@
     fireballColorSetup.style.backgroundColor = color;
   }, WIZARD_FIREBALL_COLORS);
 
-  // coatColorSetup.addEventListener('click', function () {
-  //   coatColorSetup.style.fill = window.util.getRandomFromArray(WIZARD_COAT_COLORS);
-  // });
-  // eyeColorSetup.addEventListener('click', function () {
-  //   eyeColorSetup.style.fill = window.util.getRandomFromArray(WIZARD_EYE_COLORS);
-  // });
-  // fireballColorSetup.addEventListener('click', function () {
-  //   fireballColorSetup.style.backgroundColor = window.util.getRandomFromArray(WIZARD_FIREBALL_COLORS);
-  // });
-
   var fragment = document.createDocumentFragment();
   for (var j = 0; j < wizards.length; j++) {
     fragment.appendChild(renderWizard(wizards[j]));
   }
   similarWizardList.appendChild(fragment);
   window.util.showElement(userDialog.querySelector('.setup-similar'));
+
+  // Implement drag&drop functionality for wizard artifacts
+  shopElement.addEventListener('dragstart', function (event) {
+    if (event.target.tagName.toLowerCase() === 'img') {
+      draggedItem = event.target;
+      event.dataTransfer.setData('text/plain', event.target.alt);
+      artifactsElement.style.outline = '2px dashed red';
+    }
+  });
+
+  artifactsElement.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+    return false;
+  });
+
+  artifactsElement.addEventListener('drop', function (evt) {
+    evt.target.style.backgroundColor = '';
+    if (evt.target.tagName.toLowerCase() === 'div' && evt.target.innerHTML === '') {
+      var nodeCopy = draggedItem.cloneNode(true);
+      evt.target.appendChild(nodeCopy);
+    }
+    artifactsElement.style.outline = 'none';
+    evt.preventDefault();
+  });
+
+  artifactsElement.addEventListener('dragenter', function (evt) {
+    evt.target.style.backgroundColor = 'yellow';
+    evt.preventDefault();
+  });
+
+  artifactsElement.addEventListener('dragleave', function (evt) {
+    evt.target.style.backgroundColor = '';
+    artifactsElement.style.outline = '2px dashed red';
+    evt.preventDefault();
+  });
+
 })();
 
 
