@@ -34,6 +34,13 @@
     return wizardElement;
   };
 
+  var fillElement = function (element, color) {
+    element.style.fill = color;
+  };
+  var changeElementBackground = function (element, color) {
+    element.style.backgroundColor = color;
+  };
+
   var wizards = [];
   for (var i = 0; i < 4; i++) {
     wizards.push({
@@ -43,15 +50,9 @@
     });
   }
 
-  window.colorize(coatColorSetup, function (color) {
-    coatColorSetup.style.fill = color;
-  }, WIZARD_COAT_COLORS);
-  window.colorize(eyeColorSetup, function (color) {
-    eyeColorSetup.style.fill = color;
-  }, WIZARD_EYE_COLORS);
-  window.colorize(fireballColorSetup, function (color) {
-    fireballColorSetup.style.backgroundColor = color;
-  }, WIZARD_FIREBALL_COLORS);
+  window.colorizeElement(coatColorSetup, WIZARD_COAT_COLORS, fillElement);
+  window.colorizeElement(eyeColorSetup, WIZARD_EYE_COLORS, fillElement);
+  window.colorizeElement(fireballColorSetup, WIZARD_FIREBALL_COLORS, changeElementBackground);
 
   var fragment = document.createDocumentFragment();
   for (var j = 0; j < wizards.length; j++) {
@@ -94,7 +95,4 @@
     artifactsElement.style.outline = '2px dashed red';
     evt.preventDefault();
   });
-
 })();
-
-
