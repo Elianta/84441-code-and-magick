@@ -1,9 +1,9 @@
 'use strict';
 (function () {
-  window.colorize = function (element, onColorChange, colorSet) {
+  window.colorizeElement = function (element, colorSet, onColorChange) {
     element.addEventListener('click', function () {
       var color = window.util.getRandomFromArray(colorSet);
-      onColorChange(color);
+      onColorChange(element, color);
     });
   };
 })();
