@@ -4,12 +4,22 @@
   var similarWizardList = similar.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
+  var renderWizardArtifacts = function (wizard) {
+    return wizard.artifacts.map(function (it) {
+      return it.name;
+    }).join('<br>');
+  };
+
   var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-    return wizardElement;
+    var wizardDocumentFragment = similarWizardTemplate.cloneNode(true);
+    var wizardElement = wizardDocumentFragment.querySelector('.wizard');
+    wizardDocumentFragment.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardDocumentFragment.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardDocumentFragment.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+    window.popup(wizardElement, function () {
+      return renderWizardArtifacts(wizard);
+    });
+    return wizardDocumentFragment;
   };
 
   window.render = function (data) {
